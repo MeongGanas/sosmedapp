@@ -1,6 +1,5 @@
 "use server";
 
-import bcrypt from "bcryptjs";
 import { LoginSchema } from "@/app/schema/schemas";
 import { z } from "zod";
 import { signIn } from "@/auth";
