@@ -21,9 +21,9 @@ model User {
   emailVerified DateTime?
   profile       String?
   accounts      Account[]
-  Posts         Post[]
-  Comment       Comment[]
-  Reply         Reply[]
+  posts         Post[]
+  comment       Comment[]
+  reply         Reply[]
 }
 
 model Account {

@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   Globe,
   Home,
-  LogOut,
   Menu,
   MessageCircle,
   Nfc,
@@ -17,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import Logout from "@/actions/auth/logout";
+import LogoutButton from "../auth/LogoutButton";
 
 export default function Navbar({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -136,16 +135,5 @@ function NavLinks() {
         Profile
       </Link>
     </>
-  );
-}
-
-function LogoutButton() {
-  return (
-    <form action={Logout}>
-      <Button className="w-full flex gap-2 items-center" type="submit">
-        <LogOut className="h-5 w-5" />
-        Logout
-      </Button>
-    </form>
   );
 }

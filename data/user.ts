@@ -9,3 +9,12 @@ export async function getUserByEmail(email: string) {
     return null;
   }
 }
+
+export async function getUserById(id: string) {
+  try {
+    const existingUser = await db.user.findUnique({ where: { id } });
+    return existingUser;
+  } catch (error) {
+    return null;
+  }
+}
