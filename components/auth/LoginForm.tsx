@@ -28,7 +28,6 @@ import { FormError, FormSuccess } from "./FormMessage";
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -41,7 +40,6 @@ export default function LoginForm() {
 
   function onSubmit(values: z.infer<typeof LoginSchema>) {
     setError("");
-    setSuccess("");
     startTransition(() => {
       Login(values).then((data) => {
         setError(data?.error);
@@ -97,7 +95,6 @@ export default function LoginForm() {
               )}
             />
             <FormError message={error} />
-            <FormSuccess message={success} />
             <Button type="submit" className="w-full">
               Login
             </Button>
