@@ -1,7 +1,9 @@
+import CreatePostForm from "@/components/protected/CreatePostForm";
+
 export default function Page() {
   return (
     <div>
-      <h1>Create a posts</h1>
+      <CreatePostForm />
     </div>
   );
 }

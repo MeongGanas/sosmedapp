@@ -16,7 +16,7 @@ export default async function Register(values: z.infer<typeof RegisterSchema>) {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     await db.user.create({
-      data: { username, email, password: hashedPassword },
+      data: { name: username, email, password: hashedPassword },
     });
     return { success: "User successfuly created!" };
   } catch (err) {

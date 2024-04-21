@@ -15,11 +15,11 @@ datasource db {
 
 model User {
   id            String    @id @default(cuid())
-  username      String
+  name          String
   email         String    @unique
   password      String?
   emailVerified DateTime?
-  profile       String?
+  image         String?
   accounts      Account[]
   posts         Post[]
   comment       Comment[]
@@ -50,7 +50,7 @@ model Post {
   id        String    @id @default(cuid())
   userId    String    @map("user_id")
   image     String
-  caption   String
+  caption   String?
   likes     Int       @default(0)
   comments  Comment[]
   createdAt DateTime  @default(now())
