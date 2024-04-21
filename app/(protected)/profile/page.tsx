@@ -1,8 +1,9 @@
 "use client";
-import useCurrentUser from "@/hooks/use-current-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import useCurrentUser from "@/hooks/use-current-user";
 import { Edit2, User } from "lucide-react";
+import Image from "next/image";
 
 export default function Page() {
   const user = useCurrentUser();
@@ -10,7 +11,7 @@ export default function Page() {
   return (
     <section>
       <h1 className="font-bold text-2xl mb-5">Profile Page</h1>
-      <div className="flex items-center gap-5 border-b pb-10">
+      <div className="flex items-center gap-5 border-b pb-10 mb-5">
         <Avatar className="w-20 h-20">
           {user?.image && <AvatarImage src={user?.image} />}
           <AvatarFallback>
@@ -37,6 +38,15 @@ export default function Page() {
             </li>
           </ul>
         </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2">
+        {user?.posts &&
+          user?.posts.map((post) => (
+            <div className="w-full h-full flex items-center bg-black justify-center">
+              <Image src={post.image} width={300} height={300} alt={post.id} />
+            </div>
+          ))}
       </div>
     </section>
   );

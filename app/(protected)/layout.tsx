@@ -1,3 +1,4 @@
+"use server"
 import { auth } from "@/auth";
 import { Sidenav, Navbar } from "@/components/layout/Navbar";
 import { SessionProvider } from "next-auth/react";
