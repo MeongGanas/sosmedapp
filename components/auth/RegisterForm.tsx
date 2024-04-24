@@ -117,7 +117,7 @@ export default function RegisterForm() {
             />
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button type="submit" className="w-full">
+            <Button type="submit" disabled={isPending} className="w-full">
               Register
             </Button>
           </form>

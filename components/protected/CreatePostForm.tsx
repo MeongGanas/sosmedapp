@@ -1,4 +1,3 @@
-"use client";
 import {
   Card,
   CardContent,
@@ -18,7 +17,7 @@ export default function CreatePostForm() {
   const [state, dispatch] = useFormState(CreatePost, undefined);
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto w-96">
       <CardHeader>
         <CardTitle className="text-2xl">Create Post</CardTitle>
         <CardDescription>Fill below form to create a new post.</CardDescription>

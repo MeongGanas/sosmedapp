@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Menu, Nfc } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,7 +8,7 @@ import { Searchbar, NavLinks, LogoutButton } from "./NavComponent";
 
 export function Navbar() {
   return (
-    <div className="hidden border-r bg-muted/40 md:block">
+    <div className="hidden border-r bg-[#fefffc] md:block sticky top-0 h-screen">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
@@ -29,7 +31,7 @@ export function Navbar() {
 
 export function Sidenav() {
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+    <header className="flex h-14 items-center gap-4 border-b bg-[#fefffc] px-4 lg:h-[60px] lg:px-6 sticky top-0 z-10">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">

@@ -1,23 +1,21 @@
-import { getAllPostsById } from "@/data/post";
-import Image from "next/image";
+// import { getAllPostsById } from "@/data/post";
+// import PostCard from "../PostCard";
+// import { auth } from "@/auth";
 
-export default async function PostsList() {
-  const posts = await getAllPostsById();
+// export default async function PostsList() {
+//   const session = await auth();
+//   const posts = await getAllPostsById();
 
-  return (
-    <div className="grid grid-cols-3 gap-1">
-      {posts &&
-        posts.map((post) => (
-          <div className="w-full h-full flex items-center bg-black justify-center">
-            <Image
-              src={post.image}
-              width={300}
-              height={300}
-              className="w-full"
-              alt={post.id}
-            />
-          </div>
-        ))}
-    </div>
-  );
-}
+//   return (
+//     <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
+//       {posts &&
+//         posts.map((post) => (
+//           <PostCard
+//             post={post}
+//             key={post.id}
+//             isAdmin={session?.user?.id === post.userId}
+//           />
+//         ))}
+//     </div>
+//   );
+// }

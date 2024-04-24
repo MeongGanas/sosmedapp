@@ -22,8 +22,19 @@ model User {
   image         String?
   accounts      Account[]
   posts         Post[]
-  comment       Comment[]
-  reply         Reply[]
+  comments      Comment[]
+  replies       Reply[]
+  followedBy    Follows[] @relation("following")
+  following     Follows[] @relation("follower")
+}
+
+model Follows {
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
 }
 
 model Account {

@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/form";
 import { useState, useTransition } from "react";
 import Login from "@/actions/auth/login";
-import { FormError, FormSuccess } from "./FormMessage";
+import { FormError } from "./FormMessage";
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>("");
@@ -95,7 +95,7 @@ export default function LoginForm() {
               )}
             />
             <FormError message={error} />
-            <Button type="submit" className="w-full">
+            <Button type="submit" disabled={isPending} className="w-full">
               Login
             </Button>
           </form>
