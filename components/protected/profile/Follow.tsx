@@ -1,6 +1,12 @@
 import useFollow from "@/app/hooks/useFollow";
+import { Post } from "@/lib/definitions";
 
-export default function Follow({ id }: { id: string | undefined }) {
+interface Follow {
+  id: string | undefined;
+  posts: Array<Post>;
+}
+
+export default function Follow({ id, posts }: Follow) {
   const { data, isLoading, error } = useFollow(id);
 
   if (isLoading) return <h1>Loading...</h1>;
@@ -11,7 +17,7 @@ export default function Follow({ id }: { id: string | undefined }) {
     <>
       <ul className="flex gap-5">
         <li>
-          <h4> Post</h4>
+          <h4>{posts.length} Post</h4>
         </li>
         <li>
           <h4>{data.followedBy.length} Follower</h4>

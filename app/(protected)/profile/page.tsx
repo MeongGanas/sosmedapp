@@ -1,6 +1,7 @@
 "use client";
 
 import useCurrentUser from "@/app/hooks/useCurrentUser";
+import { useUserPosts } from "@/app/hooks/usePosts";
 import Follow from "@/components/protected/profile/Follow";
 import PostsList from "@/components/protected/profile/PostsList";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,6 +10,7 @@ import { Edit2, User } from "lucide-react";
 
 export default function Page() {
   const user = useCurrentUser();
+  const { data, isLoading, error } = useUserPosts(user?.id);
 
   return (
     <section>
@@ -28,10 +30,10 @@ export default function Page() {
               Edit Profile
             </Button>
           </div>
-          <Follow id={user?.id} />
+          <Follow id={user?.id} posts={data} />
         </div>
       </div>
-      <PostsList userId={user?.id} />
+      <PostsList posts={data} isLoading={isLoading} error={error} />
     </section>
   );
 }
