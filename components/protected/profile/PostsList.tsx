@@ -1,21 +1,24 @@
-// import { getAllPostsById } from "@/data/post";
-// import PostCard from "../PostCard";
-// import { auth } from "@/auth";
+import { Post } from "@/lib/definitions";
+import { ProfilePostCard } from "../PostCard";
+import { useUserPosts } from "@/app/hooks/usePosts";
 
-// export default async function PostsList() {
-//   const session = await auth();
-//   const posts = await getAllPostsById();
+export default function PostsList({ userId }: { userId: string | undefined }) {
+  const { data, isLoading, error } = useUserPosts(userId);
 
-//   return (
-//     <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
-//       {posts &&
-//         posts.map((post) => (
-//           <PostCard
-//             post={post}
-//             key={post.id}
-//             isAdmin={session?.user?.id === post.userId}
-//           />
-//         ))}
-//     </div>
-//   );
-// }
+  if (isLoading) return <h1>Loading...</h1>;
+
+  if (error) return <h1>{error.message}</h1>;
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
+      {data &&
+        data.map((post: Post) => (
+          <ProfilePostCard
+            post={post}
+            key={post.id}
+            admin={post.userId === userId}
+          />
+        ))}
+    </div>
+  );
+}

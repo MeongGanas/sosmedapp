@@ -1,6 +1,6 @@
 "use client";
 import { useAllPosts } from "@/app/hooks/usePosts";
-import PostCard from "@/components/protected/PostCard";
+import { ExplorePostCard } from "@/components/protected/PostCard";
 import { Post } from "@/lib/definitions";
 
 export default function Page() {
@@ -14,7 +14,9 @@ export default function Page() {
     <main>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
         {data &&
-          data.map((post: Post) => <PostCard post={post} key={post.id} />)}
+          data.map((post: Post) => (
+            <ExplorePostCard post={post} key={post.id} />
+          ))}
       </div>
     </main>
   );

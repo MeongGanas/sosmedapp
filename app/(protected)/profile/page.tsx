@@ -1,12 +1,15 @@
 "use client";
 
 import useCurrentUser from "@/app/hooks/useCurrentUser";
+import Follow from "@/components/protected/profile/Follow";
+import PostsList from "@/components/protected/profile/PostsList";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Edit2, User } from "lucide-react";
 
 export default function Page() {
   const user = useCurrentUser();
+
   return (
     <section>
       <h1 className="font-bold text-2xl mb-5">Profile Page</h1>
@@ -25,8 +28,10 @@ export default function Page() {
               Edit Profile
             </Button>
           </div>
+          <Follow id={user?.id} />
         </div>
       </div>
+      <PostsList userId={user?.id} />
     </section>
   );
 }
