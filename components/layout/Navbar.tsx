@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Menu, Nfc } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Searchbar, NavLinks, LogoutButton } from "./NavComponent";
+import { NavLinks, LogoutButton } from "./NavComponent";
 
 export function Navbar() {
   return (
@@ -31,7 +31,7 @@ export function Navbar() {
 
 export function Sidenav() {
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-[#fefffc] px-4 lg:h-[60px] lg:px-6 sticky top-0 z-10">
+    <header className="flex h-14 items-center gap-4 border-b bg-[#fefffc] px-4 sticky top-0 z-10 lg:hidden">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -55,7 +55,6 @@ export function Sidenav() {
           </div>
         </SheetContent>
       </Sheet>
-      <Searchbar />
     </header>
   );
 }

@@ -1,12 +1,13 @@
 "use client";
 import Loading from "@/components/loading";
+import Searchbar from "@/components/protected/search/searchbar";
 import { Suspense } from "react";
 
 export default function Page() {
   return (
-    <section id="home">
+    <section id="search">
       <Suspense fallback={<Loading />}>
-        <h1>Home Page</h1>
+        <Searchbar />
       </Suspense>
     </section>
   );

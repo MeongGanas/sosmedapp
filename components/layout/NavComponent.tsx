@@ -3,11 +3,10 @@ import {
   Globe,
   Home,
   MessageCircle,
-  Search,
+  SearchIcon,
   SquarePlus,
   User,
 } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -15,30 +14,11 @@ import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 
-export function Searchbar() {
-  const pathname = usePathname();
-  const isExploreActive = pathname.startsWith("/explore");
-
-  return (
-    <div className={`w-full flex-1 ${isExploreActive ? "block" : "hidden"}`}>
-      <form className="md:flex md:justify-center">
-        <div className="relative">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search username..."
-            className="w-full appearance-none bg-background pl-8 shadow-none md:w-96"
-          />
-        </div>
-      </form>
-    </div>
-  );
-}
-
 export function NavLinks() {
   const pathname = usePathname();
   const isHomeActive = pathname === "/";
   const isExploreActive = pathname.startsWith("/explore");
+  const isSearchActive = pathname.startsWith("/search");
   const isMessageActive = pathname.startsWith("/message");
   const isCreateActive = pathname.startsWith("/create");
   const isProfileActive = pathname.startsWith("/profile");
@@ -51,6 +31,13 @@ export function NavLinks() {
       >
         <Home className="h-4 w-4" />
         Home
+      </Link>
+      <Link
+        href="/search"
+        className={`${isSearchActive ? "nav-item-active" : "nav-item"}`}
+      >
+        <SearchIcon className="h-4 w-4" />
+        Search
       </Link>
       <Link
         href="/explore"
@@ -88,12 +75,11 @@ export function NavLinks() {
 }
 
 export function LogoutButton() {
-  const onClick = () => {
-    signOut();
-  };
-
   return (
-    <Button className="w-full flex gap-2 items-center" onClick={onClick}>
+    <Button
+      className="w-full flex gap-2 items-center"
+      onClick={() => signOut()}
+    >
       <LogOut className="h-5 w-5" />
       Logout
     </Button>

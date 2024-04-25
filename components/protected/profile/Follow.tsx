@@ -4,12 +4,13 @@ import { Post } from "@/lib/definitions";
 interface Follow {
   id: string | undefined;
   posts: Array<Post>;
+  postLoading: boolean;
 }
 
-export default function Follow({ id, posts }: Follow) {
+export default function Follow({ id, posts, postLoading }: Follow) {
   const { data, isLoading, error } = useFollow(id);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading || postLoading) return <h1>Loading...</h1>;
 
   if (error) return <h1>{error.message}</h1>;
 

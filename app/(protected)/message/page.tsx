@@ -1,8 +1,13 @@
 "use client";
+import Loading from "@/components/loading";
+import { Suspense } from "react";
+
 export default function Page() {
   return (
-    <main>
-      <h1>Message page</h1>
-    </main>
+    <section id="message">
+      <Suspense fallback={<Loading />}>
+        <h1>Message page</h1>
+      </Suspense>
+    </section>
   );
 }
