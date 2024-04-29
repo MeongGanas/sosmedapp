@@ -10,8 +10,13 @@ export default async function Register(values: z.infer<typeof RegisterSchema>) {
 
   const { username, email, password } = validFields.data;
 
-  const existingUser = await db.user.findUnique({ where: { email } });
-  if (existingUser) return { error: "Email already taken" };
+  const existingUsername = await db.user.findUnique({
+    where: { name: username },
+  });
+  if (existingUsername) return { error: "Username already taken" };
+
+  const existingEmail = await db.user.findUnique({ where: { email } });
+  if (existingEmail) return { error: "Email already taken" };
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);

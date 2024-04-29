@@ -1,6 +1,6 @@
 "use client";
 import { useAllPosts } from "@/app/hooks/usePosts";
-import { ExplorePostCard } from "@/components/protected/PostCard";
+import { ExplorePostCard } from "../PostCard";
 import { Post } from "@/lib/definitions";
 
 export default function AllPosts() {

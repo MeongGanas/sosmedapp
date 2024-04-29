@@ -8,7 +8,10 @@ export const LoginSchema = z.object({
 export const RegisterSchema = z.object({
   username: z
     .string()
-    .min(2, { message: "Username minimum 2 characters required" }),
+    .trim()
+    .toLowerCase()
+    .min(2, { message: "Username minimum 2 characters required" })
+    .transform((value) => value.replaceAll(" ", "")),
   email: z.string().email({ message: "Email not valid" }),
   password: z
     .string()

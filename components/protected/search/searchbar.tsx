@@ -26,7 +26,7 @@ export default function Searchbar() {
         <Input
           type="search"
           placeholder="Search username..."
-          className="w-full appearance-none bg-background pl-8 shadow-none md:w-96"
+          className="w-full outline-none appearance-none bg-background pl-8 shadow-none md:w-96"
           onChange={(e) => {
             handleSearch(e.target.value);
           }}

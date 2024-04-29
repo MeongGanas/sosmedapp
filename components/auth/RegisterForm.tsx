@@ -71,6 +71,7 @@ export default function RegisterForm() {
                   <FormControl>
                     <Input
                       placeholder="username"
+                      maxLength={100}
                       {...field}
                       disabled={isPending}
                     />
