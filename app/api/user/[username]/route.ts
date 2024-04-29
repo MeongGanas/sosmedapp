@@ -2,15 +2,16 @@ import db from "@/lib/db";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string | undefined } }
+  { params }: { params: { username: string | undefined } }
 ) {
-  const id = params.id;
+  const username = params.username;
   try {
     const user = await db.user.findUnique({
-      where: { id },
+      where: { name: username },
       include: {
         followedBy: true,
         following: true,
+        posts: true,
       },
     });
     return Response.json(user);

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 export default function Page() {
   return (
-    <section id="profile">
+    <section id="user-profile">
       <Suspense fallback={<Loading />}>
         <ProfileComponent />
       </Suspense>

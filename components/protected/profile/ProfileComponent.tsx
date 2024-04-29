@@ -1,37 +1,63 @@
 "use client";
-import Follow from "@/components/protected/profile/Follow";
-import PostsList from "@/components/protected/profile/PostsList";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Edit2, User } from "lucide-react";
+import { Edit2, User as UserIcon } from "lucide-react";
+import { useParams } from "next/navigation";
+import useDetailUser from "@/app/hooks/useUserDetail";
 import useCurrentUser from "@/app/hooks/useCurrentUser";
-import { useUserPosts } from "@/app/hooks/usePosts";
+import { Post } from "@/lib/definitions";
+import { ProfilePostCard } from "@/components/protected/PostCard";
 
 export default function ProfileComponent() {
-  const user = useCurrentUser();
-  const { data, isLoading, error } = useUserPosts(user?.id);
+  const { username }: { username: string } = useParams();
+  const currentUser = useCurrentUser();
+  const { data, isLoading, error } = useDetailUser(username);
+
+  if (isLoading) return <h1>Load user...</h1>;
+
+  if (error) return <h1>{error.message}</h1>;
+
   return (
     <>
-      <h1 className="font-bold text-2xl mb-5">Profile Page</h1>
-      <div className="flex items-center gap-5 border-b pb-10 mb-5">
+      <div className="flex items-center gap-5 border-b pt-5 pb-10 mb-5">
         <Avatar className="w-16 h-16">
-          {user?.image && <AvatarImage src={user?.image} />}
+          {data?.image && <AvatarImage src={data?.image} />}
           <AvatarFallback>
-            <User />
+            <UserIcon />
           </AvatarFallback>
         </Avatar>
         <div>
           <div className="flex mb-2 items-center gap-2">
-            <h1 className="text-lg">{user?.name}</h1>
-            <Button variant={"outline"} className="flex items-center gap-2">
-              <Edit2 width={13} height={13} />
-              Edit Profile
-            </Button>
+            <h1 className="text-lg">{data?.name}</h1>
+            {currentUser?.name === data?.name && (
+              <Button variant={"outline"} className="flex items-center gap-2">
+                <Edit2 width={13} height={13} />
+                Edit Profile
+              </Button>
+            )}
+            {currentUser?.name !== data?.name && (
+              <Button className="flex items-center gap-2">Follow</Button>
+            )}
           </div>
-          <Follow id={user?.id} posts={data} postLoading={isLoading} />
+          <ul className="flex gap-5">
+            <li>
+              <h4>{data.posts.length} Post</h4>
+            </li>
+            <li>
+              <h4>{data.followedBy.length} Follower</h4>
+            </li>
+            <li>
+              <h4>{data.following.length} Following</h4>
+            </li>
+          </ul>
         </div>
       </div>
-      <PostsList posts={data} isLoading={isLoading} error={error} />
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
+        {data.posts &&
+          data.posts.map((post: Post) => (
+            <ProfilePostCard post={post} user={data} key={post.id} />
+          ))}
+      </div>
     </>
   );
 }

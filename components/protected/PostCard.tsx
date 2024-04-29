@@ -8,27 +8,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "lucide-react";
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string | null;
-  emailVerified: Date | null;
-  image: string | null;
-}
-
-interface Post {
-  id: string;
-  userId: string;
-  image: string;
-  caption: string | null;
-  likes: number;
-  createdAt: Date;
-  updatedAt: Date;
-  user: User;
-}
+import { User as UserIcon } from "lucide-react";
+import { Post, User } from "@/lib/definitions";
 
 export function ExplorePostCard({ post }: { post: Post }) {
   return (
@@ -52,7 +33,7 @@ export function ExplorePostCard({ post }: { post: Post }) {
               <Avatar className="w-10 h-10">
                 {post.user.image && <AvatarImage src={post.user.image} />}
                 <AvatarFallback>
-                  <User className="w-4 h-4" />
+                  <UserIcon className="w-4 h-4" />
                 </AvatarFallback>
               </Avatar>
               <DialogTitle>{post.user.name}</DialogTitle>
@@ -67,13 +48,7 @@ export function ExplorePostCard({ post }: { post: Post }) {
   );
 }
 
-export function ProfilePostCard({
-  post,
-  admin,
-}: {
-  post: Post;
-  admin: boolean;
-}) {
+export function ProfilePostCard({ post, user }: { post: Post; user: User }) {
   return (
     <Dialog>
       <DialogTrigger>
@@ -93,12 +68,12 @@ export function ProfilePostCard({
           <div>
             <div className="flex items-center mb-2 gap-2">
               <Avatar className="w-10 h-10">
-                {post.user.image && <AvatarImage src={post.user.image} />}
+                {user.image && <AvatarImage src={`${user.image}`} />}
                 <AvatarFallback>
-                  <User className="w-4 h-4" />
+                  <UserIcon className="w-4 h-4" />
                 </AvatarFallback>
               </Avatar>
-              <DialogTitle>{post.user.name}</DialogTitle>
+              <DialogTitle>{user.name}</DialogTitle>
             </div>
             <DialogDescription className="text-base">
               {post.caption}

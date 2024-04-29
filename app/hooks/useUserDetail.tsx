@@ -1,9 +1,9 @@
 import fetcher from "@/lib/fetcher";
 import useSWR from "swr";
 
-export default function useFollow(id: string | undefined) {
+export default function useDetailUser(username: string | undefined) {
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/user/follower/${id}`,
+    `/api/user/${username}`,
     fetcher
   );
 

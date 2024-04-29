@@ -3,6 +3,7 @@ import useFindUser from "@/app/hooks/useFindUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "@/lib/definitions";
 import { User as UserIcon } from "lucide-react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 export default function SearchResult() {
@@ -10,20 +11,29 @@ export default function SearchResult() {
   const username = searchParams.get("username")?.toString();
   const { data, isLoading, error } = useFindUser(username);
 
+  if (isLoading) return <h1>Find user...</h1>;
+
+  if (error) return <h1>{error.message}</h1>;
+
   return (
     <ul>
       {data &&
         data.map((user: User) => (
-          <li className="grid gap-8" key={user.id}>
-            <div className="flex items-center gap-4">
-              <Avatar className="hidden h-9 w-9 sm:flex">
-                <AvatarImage src={`${user.image}`} alt="Avatar" />
-                <AvatarFallback>
-                  <UserIcon />
-                </AvatarFallback>
-              </Avatar>
-              <p className="text-sm font-medium leading-none">{user.name}</p>
-            </div>
+          <li
+            className="grid gap-8 hover:bg-slate-50 rounded-sm duration-75 transition p-3"
+            key={user.id}
+          >
+            <Link href={`/${user.name}`}>
+              <div className="flex items-center gap-4">
+                <Avatar className="hidden h-9 w-9 sm:flex">
+                  <AvatarImage src={`${user.image}`} alt="Avatar" />
+                  <AvatarFallback>
+                    <UserIcon />
+                  </AvatarFallback>
+                </Avatar>
+                <p className="text-sm font-medium leading-none">{user.name}</p>
+              </div>
+            </Link>
           </li>
         ))}
     </ul>

@@ -2,12 +2,12 @@ import db from "@/lib/db";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string | undefined } }
+  { params }: { params: { username: string | undefined } }
 ) {
-  const id = params.id;
+  const username = params.username;
   try {
     const posts = await db.post.findMany({
-      where: { userId: id },
+      where: { user: { name: username } },
       orderBy: { createdAt: "desc" },
       include: {
         user: true,

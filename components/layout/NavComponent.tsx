@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
+import useCurrentUser from "@/app/hooks/useCurrentUser";
 
 export function NavLinks() {
   const pathname = usePathname();
@@ -21,7 +22,8 @@ export function NavLinks() {
   const isSearchActive = pathname.startsWith("/search");
   const isMessageActive = pathname.startsWith("/message");
   const isCreateActive = pathname.startsWith("/create");
-  const isProfileActive = pathname.startsWith("/profile");
+  const isProfileActive = pathname.startsWith("/[username]");
+  const currentUser = useCurrentUser();
 
   return (
     <>
@@ -64,7 +66,7 @@ export function NavLinks() {
         Create
       </Link>
       <Link
-        href="/profile"
+        href={`${currentUser?.name}`}
         className={`${isProfileActive ? "nav-item-active" : "nav-item"}`}
       >
         <User className="h-4 w-4" />
