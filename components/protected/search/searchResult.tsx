@@ -9,9 +9,8 @@ import { useSearchParams } from "next/navigation";
 export default function SearchResult() {
   const searchParams = useSearchParams();
   const username = searchParams.get("username")?.toString();
-  const { data, isLoading, error } = useFindUser(username);
 
-  if (isLoading) return <h1>Find user...</h1>;
+  const { data, error } = useFindUser(username);
 
   if (error) return <h1>{error.message}</h1>;
 

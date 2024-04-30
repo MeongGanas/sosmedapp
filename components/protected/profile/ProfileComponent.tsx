@@ -9,7 +9,7 @@ import { Post } from "@/lib/definitions";
 import { ProfilePostCard } from "@/components/protected/PostCard";
 import FollowAction from "./FollowAction";
 import { Follows } from "@prisma/client";
-import UnfollowAction from "./UnfollowAction";
+import UnfollowAction from "@/components/protected/profile/UnfollowAction";
 
 export default function ProfileComponent() {
   const { username }: { username: string } = useParams();

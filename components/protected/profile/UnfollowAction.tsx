@@ -1,5 +1,5 @@
 "use client";
-import FollowUser from "@/actions/user/follow";
+import UnfollowUser from "@/actions/user/unfollow";
 import { Button } from "@/components/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
 
@@ -10,8 +10,8 @@ export default function UnfollowAction({
   following: string | undefined;
   follower: string | undefined;
 }) {
-  const followUserBind = FollowUser.bind(null, following, follower);
-  const [state, dispatch] = useFormState(followUserBind, undefined);
+  const unfollowUserBind = UnfollowUser.bind(null, following, follower);
+  const [state, dispatch] = useFormState(unfollowUserBind, undefined);
   return (
     <form action={dispatch}>
       <UnfollowButton />
