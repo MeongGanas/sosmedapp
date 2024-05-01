@@ -7,7 +7,7 @@ import {
   SquarePlus,
   User,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,62 +17,65 @@ import useCurrentUser from "@/app/hooks/useCurrentUser";
 
 export function NavLinks() {
   const pathname = usePathname();
-  const isHomeActive = pathname === "/";
-  const isExploreActive = pathname.startsWith("/explore");
-  const isSearchActive = pathname.startsWith("/search");
-  const isMessageActive = pathname.startsWith("/message");
-  const isCreateActive = pathname.startsWith("/create");
-  const isProfileActive = pathname.startsWith("/[username]");
   const currentUser = useCurrentUser();
+  const router = useRouter();
+
+  const items = [
+    {
+      label: "Home",
+      href: "/",
+      icon: Home,
+      isActive: pathname === "/",
+    },
+    {
+      label: "Search",
+      href: "/search",
+      icon: SearchIcon,
+      isActive: pathname.startsWith("/search"),
+    },
+    {
+      label: "Explore",
+      href: "/explore",
+      icon: Globe,
+      isActive: pathname.startsWith("/explore"),
+    },
+    {
+      label: "Message",
+      href: "/message",
+      icon: MessageCircle,
+      isActive: pathname.startsWith("/message"),
+    },
+    {
+      label: "Create",
+      href: "/create",
+      icon: SquarePlus,
+      isActive: pathname.startsWith("/create"),
+    },
+    {
+      label: "Profile",
+      href: `/profile/${currentUser?.name}`,
+      icon: User,
+      isActive: pathname.startsWith("/profile"),
+    },
+  ];
 
   return (
-    <>
-      <Link
-        href="/"
-        className={`${isHomeActive ? "nav-item-active" : "nav-item"}`}
-      >
-        <Home className="h-4 w-4" />
-        Home
-      </Link>
-      <Link
-        href="/search"
-        className={`${isSearchActive ? "nav-item-active" : "nav-item"}`}
-      >
-        <SearchIcon className="h-4 w-4" />
-        Search
-      </Link>
-      <Link
-        href="/explore"
-        className={`${isExploreActive ? "nav-item-active" : "nav-item"}`}
-      >
-        <Globe className="h-4 w-4" />
-        Explore{" "}
-      </Link>
-      <Link
-        href="/message"
-        className={`${isMessageActive ? "nav-item-active" : "nav-item"}`}
-      >
-        <MessageCircle className="h-4 w-4" />
-        Message
-        <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-          6
-        </Badge>
-      </Link>
-      <Link
-        href="/create"
-        className={`${isCreateActive ? "nav-item-active" : "nav-item"}`}
-      >
-        <SquarePlus className="h-4 w-4" />
-        Create
-      </Link>
-      <Link
-        href={`${currentUser?.name}`}
-        className={`${isProfileActive ? "nav-item-active" : "nav-item"}`}
-      >
-        <User className="h-4 w-4" />
-        Profile
-      </Link>
-    </>
+    <ul>
+      {items.map((item) => (
+        <li
+          key={item.href}
+          onClick={() => router.push(item.href)}
+          className={`${
+            item.isActive
+              ? "nav-item-active cursor-pointer"
+              : "nav-item cursor-pointer"
+          }`}
+        >
+          <item.icon className="h-4 w-4" />
+          {item.label}
+        </li>
+      ))}
+    </ul>
   );
 }
 

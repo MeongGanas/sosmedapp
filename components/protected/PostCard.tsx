@@ -40,7 +40,9 @@ export function ExplorePostCard({ post }: { post: Post }) {
                 </AvatarFallback>
               </Avatar>
               <DialogTitle>
-                <Link href={`/${post.user.name}`}>{post.user.name}</Link>
+                <Link href={`/profile/${post.user.name}`}>
+                  {post.user.name}
+                </Link>
               </DialogTitle>
             </div>
             <DialogDescription className="text-base text-left">

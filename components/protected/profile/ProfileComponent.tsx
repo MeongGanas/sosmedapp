@@ -10,13 +10,14 @@ import { ProfilePostCard } from "@/components/protected/PostCard";
 import FollowAction from "./FollowAction";
 import { Follows } from "@prisma/client";
 import UnfollowAction from "@/components/protected/profile/UnfollowAction";
+import Loading from "@/components/loading";
 
 export default function ProfileComponent() {
   const { username }: { username: string } = useParams();
   const currentUser = useCurrentUser();
   const { data, isLoading, error } = useDetailUser(username);
 
-  if (isLoading) return <h1>Load user...</h1>;
+  if (isLoading) return <Loading />;
 
   if (error) return <h1>{error.message}</h1>;
 

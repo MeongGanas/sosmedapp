@@ -11,3 +11,17 @@ export function useAllPosts() {
     mutate,
   };
 }
+
+export function usePosts(id: string | undefined) {
+  const { data, error, isLoading, mutate } = useSWR(
+    `/api/posts/user/${id}`,
+    fetcher
+  );
+
+  return {
+    data,
+    error,
+    isLoading,
+    mutate,
+  };
+}

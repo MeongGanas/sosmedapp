@@ -17,3 +17,13 @@ export interface Post {
   updatedAt: Date;
   user: User;
 }
+
+export interface UserWithPost {
+  id: string;
+  name: string;
+  email: string;
+  password: string | null;
+  emailVerified: Date | null;
+  image: string | null;
+  posts: Array<Post>;
+}

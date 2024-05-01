@@ -1,6 +1,5 @@
 "use server";
 import db from "@/lib/db";
-import { revalidatePath } from "next/cache";
 
 export default async function FollowUser(
   following: string | undefined,
@@ -21,7 +20,6 @@ export default async function FollowUser(
       },
     });
 
-    revalidatePath(`/${following}`);
     return { success: true, message: "Follow success!!" };
   } catch (err) {
     return { success: false, message: "Something went wrong!" };
